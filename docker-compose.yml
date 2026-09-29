@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: verification_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER=verification_user
+      - POSTGRES_PASSWORD=SuperSecretPassword123
+      - POSTGRES_DB=verification_db
+      - CHROMA_DB_PATH=/data/chroma
+      - OLLAMA_MODEL=llama3-8b
+    depends_on:
+      - postgres
+      - ollama
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:15
+    container_name: verification_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: verification_user
+      POSTGRES_PASSWORD: SuperSecretPassword123
+      POSTGRES_DB: verification_db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: verification_chroma
+    restart: unless-stopped
+    environment:
+      ANONYMIZED_CLIENT_LOGGING=default
+      MOTHERBOARD_REDACT=NAME_1
+      ENABLE_IMPORT_FROM_MLFMA=True
+      MULTIMODE=False
+      SKIP_BACKEND_INIT=1
+    volumes:
+      - chroma_data:/data/chroma
+    networks:
+      - backend
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_server
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/app/ollama
+    environment:
+      OLLAMA_HOST: /app/ollama
+    command: ["serve"]
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  pg_data:
+  chroma_data:
+  ollama_data:
