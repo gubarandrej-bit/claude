@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ruflo__memory_store",
+      "Bash(rtk git *)"
+    ]
+  },
+  "disabledMcpjsonServers": [
+    "claude-flow"
+  ]
+}
