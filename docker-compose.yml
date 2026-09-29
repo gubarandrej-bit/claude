@@ -8,11 +8,11 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - POSTGRES_USER=verification_user
-      - POSTGRES_PASSWORD=SuperSecretPassword123
-      - POSTGRES_DB=verification_db
-      - CHROMA_DB_PATH=/data/chroma
-      - OLLAMA_MODEL=llama3-8b
+      POSTGRES_USER: verification_user
+      POSTGRES_PASSWORD: SuperSecretPassword123
+      POSTGRES_DB: verification_db
+      CHROMA_DB_PATH: /data/chroma
+      OLLAMA_MODEL: llama3-8b
     depends_on:
       - postgres
       - ollama

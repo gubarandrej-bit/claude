@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "mcp__ruflo__memory_store",
-      "Bash(rtk git *)"
+      "Bash(rtk git *)",
+      "Bash(python3 *)",
+      "Bash(rtk ls *)",
+      "Bash(rtk pip *)",
+      "Bash(/usr/bin/python3 *)"
     ]
   },
   "disabledMcpjsonServers": [
