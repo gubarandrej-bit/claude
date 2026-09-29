@@ -39,8 +39,8 @@ services:
     environment:
       ANONYMIZED_CLIENT_LOGGING=default
       MOTHERBOARD_REDACT=NAME_1
-      ENABLE_IMPORT_FROM_MLFMA=True
-      MULTIMODE=False
+      ENABLE_IMPORT_FROM_MLFMA="True"
+      MULTIMODE="False"
       SKIP_BACKEND_INIT=1
     volumes:
       - chroma_data:/data/chroma
